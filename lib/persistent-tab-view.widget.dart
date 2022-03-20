@@ -31,9 +31,6 @@ class PersistentTabView extends StatefulWidget {
   /// `USE WITH CAUTION, MAY CAUSE LAYOUT ISSUES`.
   final NavBarPadding? padding;
 
-  /// Style for persistent bottom navigation bar. Accepts `NavBarStyle` to determine the theme.
-  final NavBarStyle? navBarStyle;
-
   /// Style the `neumorphic` navigation bar item.
   ///
   /// Works only with style `neumorphic`.
@@ -52,6 +49,12 @@ class PersistentTabView extends StatefulWidget {
 
   /// Custom navigation bar widget builder.
   final Widget Function(NavBarEssentials)? customWidget;
+
+  /// TODO update doc:
+  /// Builder for the Navigation Bar Widget. This also exposes
+  /// [NavBarEssentials] for further control. You can either pass a custom
+  /// Widget or choose one of the predefined Navigation Bars.
+  final Widget? navBarWidget;
 
   /// If using `custom` navBarStyle, define this instead of the `items` property
   final int? itemCount;
@@ -146,10 +149,12 @@ class PersistentTabView extends StatefulWidget {
     this.itemAnimationProperties,
     this.hideNavigationBar,
     this.screenTransitionAnimation = const ScreenTransitionAnimation(),
-    this.navBarStyle = NavBarStyle.style1,
+    this.navBarWidget,
   })  : assert(items != null,
             "Items can only be null in case of custom navigation bar style. Please add the items!"),
-        assert(assertMidButtonStyles(navBarStyle!, items!.length),
+        assert(
+            assertMidButtonStyles(NavBarStyle.style1,
+                items!.length), //TODO do something senseful with this
             "NavBar styles 15-18 only accept 3 or 5 PersistentBottomNavBarItem items."),
         assert(items!.length == screens.length,
             "screens and items length should be same. If you are using the onPressed callback function of 'PersistentBottomNavBarItem', enter a dummy screen like Container() in its place in the screens"),
@@ -177,6 +182,7 @@ class PersistentTabView extends StatefulWidget {
     this.floatingActionButton,
     required this.customWidget,
     required this.itemCount,
+    this.navBarWidget,
     this.resizeToAvoidBottomInset = true,
     this.bottomScreenMargin,
     this.selectedTabScreenContext,
@@ -204,7 +210,6 @@ class PersistentTabView extends StatefulWidget {
         this.items = null,
         this.itemAnimationProperties = null,
         this.navBarHeight = null,
-        this.navBarStyle = null,
         this.neumorphicProperties = null,
         this.onItemSelected = null,
         this.padding = null,
@@ -261,8 +266,7 @@ class _PersistentTabViewState extends State<PersistentTabView> {
   }
 
   Widget _buildScreen(int index) {
-    RouteAndNavigatorSettings _routeAndNavigatorSettings = widget
-            .isCustomWidget
+    RouteAndNavigatorSettings _routeAndNavigatorSettings = widget.isCustomWidget
         ? RouteAndNavigatorSettings(
             defaultTitle: widget.routeAndNavigatorSettings!.defaultTitle,
             initialRoute: widget.routeAndNavigatorSettings!.initialRoute,
@@ -305,7 +309,10 @@ class _PersistentTabViewState extends State<PersistentTabView> {
           ),
         ],
       );
-    } else if (widget.navBarStyle == NavBarStyle.style15) {
+    } else if (false/*widget.navBarStyle == NavBarStyle.style15*/) {
+      // TODO: base condition on navbarwidget type / attribute
+      // This creates an invisible gesturedetector above the navbar so the button that is raised up can be clicked outside the navbar.
+      // It is moved by translation which is not respected by gesturedetector which is why this is needed.
       return Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -372,7 +379,8 @@ class _PersistentTabViewState extends State<PersistentTabView> {
                 ),
         ],
       );
-    } else if (widget.navBarStyle == NavBarStyle.style16) {
+    } else if (false/*widget.navBarStyle == NavBarStyle.style16*/) {
+      // TODO see above
       return Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -493,9 +501,9 @@ class _PersistentTabViewState extends State<PersistentTabView> {
             isCustomWidget: widget.isCustomWidget,
             navBarDecoration: widget.decoration,
             margin: widget.margin,
+            navBarWidget: widget.navBarWidget,
             confineToSafeArea: widget.confineInSafeArea,
             hideNavigationBar: widget.hideNavigationBar,
-            navBarStyle: widget.navBarStyle,
             neumorphicProperties: widget.neumorphicProperties,
             customNavBarWidget: widget.customWidget,
             onAnimationComplete: (isAnimating, isCompleted) {
@@ -579,8 +587,8 @@ class _PersistentTabViewState extends State<PersistentTabView> {
                   .onSelectedTabPressWhenNoScreensPushed !=
               null &&
           !Navigator.of(_contextList[_controller.index]!).canPop()) {
-        widget.items![_controller.index]
-            .onSelectedTabPressWhenNoScreensPushed!();
+        widget
+            .items![_controller.index].onSelectedTabPressWhenNoScreensPushed!();
       }
 
       if (widget.popActionScreens == PopActionScreensType.once) {

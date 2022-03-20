@@ -237,6 +237,8 @@ class _ProvidedStyleExampleState extends State<ProvidedStyleExample> {
         margin: EdgeInsets.all(0.0),
         popActionScreens: PopActionScreensType.all,
         bottomScreenMargin: 0.0,
+        floatingActionButton:
+            IconButton(onPressed: () {}, icon: Icon(Icons.ac_unit, size: 	40,)),
         onWillPop: (context) async {
           await showDialog(
             context: context,
@@ -269,8 +271,8 @@ class _ProvidedStyleExampleState extends State<ProvidedStyleExample> {
           curve: Curves.ease,
           duration: Duration(milliseconds: 200),
         ),
-        navBarStyle:
-            NavBarStyle.style17, // Choose the nav bar style with this property
+        navBarWidget:
+            BottomNavStyle1(), // Choose the nav bar widget with this property
       ),
     );
   }

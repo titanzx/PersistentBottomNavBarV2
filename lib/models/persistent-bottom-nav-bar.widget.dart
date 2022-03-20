@@ -9,7 +9,7 @@ class PersistentBottomNavBar extends StatelessWidget {
   final NeumorphicProperties? neumorphicProperties;
   final NavBarEssentials? navBarEssentials;
   final NavBarDecoration? navBarDecoration;
-  final NavBarStyle? navBarStyle;
+  final Widget? navBarWidget;
   final bool? isCustomWidget;
 
   const PersistentBottomNavBar({
@@ -22,7 +22,7 @@ class PersistentBottomNavBar extends StatelessWidget {
     this.neumorphicProperties = const NeumorphicProperties(),
     this.navBarEssentials,
     this.navBarDecoration,
-    this.navBarStyle,
+    this.navBarWidget,
     this.isCustomWidget = false,
   }) : super(key: key);
 
@@ -59,8 +59,8 @@ class PersistentBottomNavBar extends StatelessWidget {
                       ),
                     ),
                   )
-            : this.navBarStyle == NavBarStyle.style15 ||
-                    this.navBarStyle == NavBarStyle.style16
+            : false/*this.navBarStyle == NavBarStyle.style15 ||
+                    this.navBarStyle == NavBarStyle.style16*/ //TODO: Depend on navbarWidget type
                 ? this.margin!.bottom > 0
                     ? SafeArea(
                         top: false,
@@ -79,7 +79,7 @@ class PersistentBottomNavBar extends StatelessWidget {
                                 .items![this.navBarEssentials!.selectedIndex!]
                                 .opacity,
                           ),
-                          child: getNavBarStyle(),
+                          child: this.navBarWidget ?? Container(),
                         ),
                       )
                     : Container(
@@ -99,7 +99,7 @@ class PersistentBottomNavBar extends StatelessWidget {
                                   (this.hideNavigationBar ?? false)
                               ? false
                               : confineToSafeArea ?? true,
-                          child: getNavBarStyle()!,
+                          child: this.navBarWidget ?? Container(),
                         ),
                       )
                 : Container(
@@ -139,7 +139,7 @@ class PersistentBottomNavBar extends StatelessWidget {
                                         (this.hideNavigationBar ?? false)
                                     ? false
                                     : confineToSafeArea ?? true,
-                            child: getNavBarStyle()!,
+                            child: this.navBarWidget ?? Container(),
                           ),
                         ),
                       ),
@@ -170,7 +170,7 @@ class PersistentBottomNavBar extends StatelessWidget {
     NeumorphicProperties? neumorphicProperties,
     NavBarEssentials? navBarEssentials,
     NavBarDecoration? navBarDecoration,
-    NavBarStyle? navBarStyle,
+    Widget? navBarWidget,
     bool? isCustomWidget,
   }) =>
       PersistentBottomNavBar(
@@ -182,7 +182,7 @@ class PersistentBottomNavBar extends StatelessWidget {
         neumorphicProperties: neumorphicProperties ?? this.neumorphicProperties,
         navBarEssentials: navBarEssentials ?? this.navBarEssentials,
         navBarDecoration: navBarDecoration ?? this.navBarDecoration,
-        navBarStyle: navBarStyle ?? this.navBarStyle,
+        navBarWidget: navBarWidget ?? this.navBarWidget,
         isCustomWidget: isCustomWidget ?? this.isCustomWidget,
       );
 
@@ -190,99 +190,5 @@ class PersistentBottomNavBar extends StatelessWidget {
     return this.navBarEssentials!.items == null
         ? true
         : !(this.navBarEssentials!.items![index!].opacity < 1.0);
-  }
-
-  Widget? getNavBarStyle() {
-    if (isCustomWidget!) {
-      return customNavBarWidget?.call(this.navBarEssentials!);
-    } else {
-      switch (navBarStyle) {
-        case NavBarStyle.style1:
-          return BottomNavStyle1(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style2:
-          return BottomNavStyle2(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style3:
-          return BottomNavStyle3(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style4:
-          return BottomNavStyle4(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style5:
-          return BottomNavStyle5(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style6:
-          return BottomNavStyle6(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style7:
-          return BottomNavStyle7(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style8:
-          return BottomNavStyle8(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style9:
-          return BottomNavStyle9(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style10:
-          return BottomNavStyle10(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style11:
-          return BottomNavStyle11(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style12:
-          return BottomNavStyle12(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style13:
-          return BottomNavStyle13(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style14:
-          return BottomNavStyle14(
-            navBarEssentials: this.navBarEssentials,
-          );
-        case NavBarStyle.style15:
-          return BottomNavStyle15(
-            navBarEssentials: this.navBarEssentials,
-            navBarDecoration: this.navBarDecoration,
-          );
-        case NavBarStyle.style16:
-          return BottomNavStyle16(
-            navBarEssentials: this.navBarEssentials,
-            navBarDecoration: this.navBarDecoration,
-          );
-        case NavBarStyle.style17:
-          return BottomNavStyle17(
-            navBarEssentials: this.navBarEssentials,
-            navBarDecoration: this.navBarDecoration,
-          );
-        case NavBarStyle.style18:
-          return BottomNavStyle18(
-            navBarEssentials: this.navBarEssentials,
-            navBarDecoration: this.navBarDecoration,
-          );
-        case NavBarStyle.neumorphic:
-          return NeumorphicBottomNavBar(
-            navBarEssentials: this.navBarEssentials,
-            neumorphicProperties: this.neumorphicProperties,
-          );
-        default:
-          return BottomNavSimple(
-            navBarEssentials: this.navBarEssentials,
-          );
-      }
-    }
   }
 }
