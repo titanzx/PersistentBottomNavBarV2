@@ -33,47 +33,48 @@ class BottomNavStyle3 extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Expanded(
-                    child: IconTheme(
-                      data: IconThemeData(
-                          size: item.iconSize,
-                          color: isSelected
-                              ? (item.activeColorSecondary == null
-                                  ? item.activeColorPrimary
-                                  : item.activeColorSecondary)
-                              : item.inactiveColorPrimary == null
-                                  ? item.activeColorPrimary
-                                  : item.inactiveColorPrimary),
-                      child: isSelected
-                          ? item.icon
-                          : item.inactiveIcon ?? item.icon,
-                    ),
-                  ),
+                  Transform.scale(
+                      alignment: Alignment.topCenter,
+                      scale: item.iconSize,
+                      child: IconTheme(
+                        data: IconThemeData(
+                            // size: item.iconSize,
+                            color: isSelected
+                                ? (item.activeColorSecondary == null
+                                    ? item.activeColorPrimary
+                                    : item.activeColorSecondary)
+                                : item.inactiveColorPrimary == null
+                                    ? item.activeColorPrimary
+                                    : item.inactiveColorPrimary),
+                        child: isSelected
+                            ? item.icon
+                            : item.inactiveIcon ?? item.icon,
+                      )),
+                  SizedBox(height: 2),
                   item.title == null
                       ? SizedBox.shrink()
                       : Material(
-                        type: MaterialType.transparency,
-                        child: DefaultTextStyle.merge(
-                          style: TextStyle(
-                              color: item.textStyle != null
-                                  ? item.textStyle!.apply(
-                                          color: isSelected
-                                              ? (item.activeColorSecondary ==
-                                                      null
-                                                  ? item.activeColorPrimary
-                                                  : item.activeColorSecondary)
-                                              : item.inactiveColorPrimary)
-                                      as Color?
-                                  : isSelected
-                                      ? (item.activeColorSecondary == null
-                                          ? item.activeColorPrimary
-                                          : item.activeColorSecondary)
-                                      : item.inactiveColorPrimary,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12.0),
-                          child: FittedBox(child: Text(item.title!)),
+                          type: MaterialType.transparency,
+                          child: DefaultTextStyle.merge(
+                            style: TextStyle(
+                                color: item.textStyle != null
+                                    ? item.textStyle!.apply(
+                                        color: isSelected
+                                            ? (item.activeColorSecondary == null
+                                                ? item.activeColorPrimary
+                                                : item.activeColorSecondary)
+                                            : item
+                                                .inactiveColorPrimary) as Color?
+                                    : isSelected
+                                        ? (item.activeColorSecondary == null
+                                            ? item.activeColorPrimary
+                                            : item.activeColorSecondary)
+                                        : item.inactiveColorPrimary,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 11.0),
+                            child: Text(item.title!),
+                          ),
                         ),
-                      ),
                 ],
               ),
             ),
@@ -88,9 +89,9 @@ class BottomNavStyle3 extends StatelessWidget {
         .activeColorPrimary;
     double itemWidth = ((MediaQuery.of(context).size.width -
             ((this.navBarEssentials!.padding?.left ??
-                    MediaQuery.of(context).size.width * 0.05) +
+                    MediaQuery.of(context).size.width * 0.01) +
                 (this.navBarEssentials!.padding?.right ??
-                    MediaQuery.of(context).size.width * 0.05))) /
+                    MediaQuery.of(context).size.width * 0.01))) /
         this.navBarEssentials!.items!.length);
     return Container(
       width: double.infinity,
@@ -98,9 +99,9 @@ class BottomNavStyle3 extends StatelessWidget {
       padding: EdgeInsets.only(
           top: this.navBarEssentials!.padding?.top ?? 0.0,
           left: this.navBarEssentials!.padding?.left ??
-              MediaQuery.of(context).size.width * 0.05,
+              MediaQuery.of(context).size.width * 0.01,
           right: this.navBarEssentials!.padding?.right ??
-              MediaQuery.of(context).size.width * 0.05,
+              MediaQuery.of(context).size.width * 0.01,
           bottom: this.navBarEssentials!.padding?.bottom ??
               this.navBarEssentials!.navBarHeight! * 0.1),
       child: Column(
@@ -129,20 +130,25 @@ class BottomNavStyle3 extends StatelessWidget {
                   curve:
                       this.navBarEssentials!.itemAnimationProperties?.curve ??
                           Curves.ease,
-                  width: itemWidth,
+                  margin: EdgeInsets.only(left: 18),
+                  width: 40,
                   height: 4.0,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: selectedItemActiveColor,
-                    borderRadius: BorderRadius.circular(100.0),
-                  ),
+                      color: selectedItemActiveColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.zero,
+                        topRight: Radius.zero,
+                        bottomLeft: Radius.circular(3),
+                        bottomRight: Radius.circular(3),
+                      )),
                 ),
               )
             ],
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.only(top: 7.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
