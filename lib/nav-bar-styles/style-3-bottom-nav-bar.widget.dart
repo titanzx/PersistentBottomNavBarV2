@@ -130,8 +130,8 @@ class BottomNavStyle3 extends StatelessWidget {
                   curve:
                       this.navBarEssentials!.itemAnimationProperties?.curve ??
                           Curves.ease,
-                  margin: EdgeInsets.only(left: 6 / 2),
-                  width: itemWidth - 6,
+                  margin: EdgeInsets.only(left: 4, right: 4),
+                  width: itemWidth - 8,
                   height: 2.0,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
@@ -139,8 +139,8 @@ class BottomNavStyle3 extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.zero,
                         topRight: Radius.zero,
-                        bottomLeft: Radius.circular(3),
-                        bottomRight: Radius.circular(3),
+                        bottomLeft: Radius.circular(2),
+                        bottomRight: Radius.circular(2),
                       )),
                 ),
               )
