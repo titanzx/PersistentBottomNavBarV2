@@ -71,7 +71,8 @@ class BottomNavStyle3 extends StatelessWidget {
                                         : item.inactiveColorPrimary,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 11.0),
-                            child: Text(item.title!),
+                            child: FittedBox(
+                                fit: BoxFit.fill, child: Text(item.title!)),
                           ),
                         ),
                 ],
@@ -129,7 +130,7 @@ class BottomNavStyle3 extends StatelessWidget {
                   curve:
                       this.navBarEssentials!.itemAnimationProperties?.curve ??
                           Curves.ease,
-                  margin: EdgeInsets.only(left: 18),
+                  margin: EdgeInsets.only(left: (itemWidth - 40) / 2),
                   width: 40,
                   height: 4.0,
                   alignment: Alignment.center,
