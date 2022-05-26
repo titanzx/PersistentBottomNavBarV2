@@ -34,7 +34,7 @@ class BottomNavStyle3 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Transform.scale(
-                      alignment: Alignment.topCenter,
+                      alignment: Alignment.bottomCenter,
                       scale: item.iconSize,
                       child: IconTheme(
                         data: IconThemeData(
@@ -50,7 +50,6 @@ class BottomNavStyle3 extends StatelessWidget {
                             ? item.icon
                             : item.inactiveIcon ?? item.icon,
                       )),
-                  SizedBox(height: 2),
                   item.title == null
                       ? SizedBox.shrink()
                       : Material(
