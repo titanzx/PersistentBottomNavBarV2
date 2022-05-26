@@ -70,7 +70,7 @@ class BottomNavStyle3 extends StatelessWidget {
                                             : item.activeColorSecondary)
                                         : item.inactiveColorPrimary,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 11.0),
+                                fontSize: 12.0),
                             child: FittedBox(
                                 fit: BoxFit.fill, child: Text(item.title!)),
                           ),
@@ -118,7 +118,7 @@ class BottomNavStyle3 extends StatelessWidget {
                 width: this.navBarEssentials!.selectedIndex == 0
                     ? MediaQuery.of(context).size.width * 0.0
                     : itemWidth * this.navBarEssentials!.selectedIndex!,
-                height: 4.0,
+                height: 2.0,
               ),
               Flexible(
                 child: AnimatedContainer(
@@ -130,9 +130,9 @@ class BottomNavStyle3 extends StatelessWidget {
                   curve:
                       this.navBarEssentials!.itemAnimationProperties?.curve ??
                           Curves.ease,
-                  margin: EdgeInsets.only(left: (itemWidth - 40) / 2),
-                  width: 40,
-                  height: 4.0,
+                  margin: EdgeInsets.only(left: 6 / 2),
+                  width: itemWidth - 6,
+                  height: 2.0,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       color: selectedItemActiveColor,
