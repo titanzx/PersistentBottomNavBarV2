@@ -144,6 +144,7 @@ class _ProvidedStyleExampleState extends State<ProvidedStyleExample> {
     return [
       PersistentBottomNavBarItem(
         icon: Icon(Icons.home),
+        semanticsLabel: 'btnHome',
         title: "Home",
         activeColorPrimary: Colors.blue,
         inactiveColorPrimary: Colors.grey,
@@ -258,7 +259,7 @@ class _ProvidedStyleExampleState extends State<ProvidedStyleExample> {
         hideNavigationBar: _hideNavBar,
         decoration: NavBarDecoration(
             colorBehindNavBar: Colors.indigo,
-            borderRadius: BorderRadius.circular(20.0)),
+            borderRadius: BorderRadius.circular(0.0)),
         popAllScreensOnTapOfSelectedTab: true,
         itemAnimationProperties: ItemAnimationProperties(
           duration: Duration(milliseconds: 400),
@@ -270,7 +271,7 @@ class _ProvidedStyleExampleState extends State<ProvidedStyleExample> {
           duration: Duration(milliseconds: 200),
         ),
         navBarStyle:
-            NavBarStyle.style17, // Choose the nav bar style with this property
+            NavBarStyle.style3, // Choose the nav bar style with this property
       ),
     );
   }

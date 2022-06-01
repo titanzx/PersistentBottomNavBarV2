@@ -51,6 +51,8 @@ class PersistentBottomNavBarItem {
   /// `TextStyle` of the title's text.
   final TextStyle? textStyle;
 
+  final String? semanticsLabel;
+
   final double iconSize;
 
   final RouteAndNavigatorSettings routeAndNavigatorSettings;
@@ -59,6 +61,7 @@ class PersistentBottomNavBarItem {
       {required this.icon,
       this.inactiveIcon,
       this.title,
+      this.semanticsLabel,
       this.contentPadding = 5.0,
       this.activeColorPrimary = CupertinoColors.activeBlue,
       this.activeColorSecondary,

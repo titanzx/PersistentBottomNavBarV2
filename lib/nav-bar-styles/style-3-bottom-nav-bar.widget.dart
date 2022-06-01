@@ -72,7 +72,14 @@ class BottomNavStyle3 extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12.0),
                             child: FittedBox(
-                                fit: BoxFit.fill, child: Text(item.title!)),
+                                fit: BoxFit.fill,
+                                child: item.semanticsLabel == null
+                                    ? Text(item.title!)
+                                    : Semantics(
+                                        container: true,
+                                        explicitChildNodes: true,
+                                        label: item.semanticsLabel,
+                                        child: Text(item.title!))),
                           ),
                         ),
                 ],
