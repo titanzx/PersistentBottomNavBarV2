@@ -13,7 +13,7 @@ class BottomNavStyle3 extends StatelessWidget {
     return this.navBarEssentials!.navBarHeight == 0
         ? SizedBox.shrink()
         : AnimatedContainer(
-            width: 100.0,
+            width: double.infinity,
             height: height! / 1.0,
             duration:
                 this.navBarEssentials!.itemAnimationProperties?.duration ??
@@ -31,25 +31,15 @@ class BottomNavStyle3 extends StatelessWidget {
               height: height / 1.0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Transform.scale(
-                      alignment: Alignment.bottomCenter,
-                      scale: item.iconSize,
-                      child: IconTheme(
-                        data: IconThemeData(
-                            // size: item.iconSize,
-                            color: isSelected
-                                ? (item.activeColorSecondary == null
-                                    ? item.activeColorPrimary
-                                    : item.activeColorSecondary)
-                                : item.inactiveColorPrimary == null
-                                    ? item.activeColorPrimary
-                                    : item.inactiveColorPrimary),
-                        child: isSelected
-                            ? item.icon
-                            : item.inactiveIcon ?? item.icon,
-                      )),
+                    alignment: Alignment.bottomCenter,
+                    scale: item.iconSize,
+                    child:
+                        isSelected ? item.icon : item.inactiveIcon ?? item.icon,
+                  ),
+                  SizedBox(height: 2),
                   item.title == null
                       ? SizedBox.shrink()
                       : Material(
@@ -69,8 +59,7 @@ class BottomNavStyle3 extends StatelessWidget {
                                             : item.activeColorSecondary)
                                         : item.inactiveColorPrimary,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 12.0,
-                                  ),
+                                    fontSize: 12.0),
                             child: FittedBox(
                                 alignment: Alignment.bottomCenter,
                                 fit: BoxFit.fill,
@@ -156,7 +145,7 @@ class BottomNavStyle3 extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 7.0),
+              padding: const EdgeInsets.only(top: 6.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
