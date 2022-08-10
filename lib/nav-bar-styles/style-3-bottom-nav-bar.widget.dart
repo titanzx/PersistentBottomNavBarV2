@@ -58,7 +58,7 @@ class BottomNavStyle3 extends StatelessWidget {
                                             ? item.activeColorPrimary
                                             : item.activeColorSecondary)
                                         : item.inactiveColorPrimary,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w600,
                                     fontSize: 12.0),
                             child: FittedBox(
                                 alignment: Alignment.bottomCenter,
