@@ -30,8 +30,8 @@ class BottomNavStyle3 extends StatelessWidget {
               alignment: Alignment.center,
               height: height / 1.0,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Transform.scale(
                     alignment: Alignment.bottomCenter,
