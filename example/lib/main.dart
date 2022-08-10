@@ -270,7 +270,7 @@ class _ProvidedStyleExampleState extends State<ProvidedStyleExample> {
           duration: Duration(milliseconds: 200),
         ),
         navBarStyle:
-            NavBarStyle.style17, // Choose the nav bar style with this property
+            NavBarStyle.style3, // Choose the nav bar style with this property
       ),
     );
   }
